@@ -1,6 +1,6 @@
 # ProToSlider
 ProToSlider - простой адаптивный слайдер на чистом js
-### Демо https://da0ab.github.io/ProToGrid/
+### Демо https://da0ab.github.io/ProToSlider/
 
 Поиск ротаторов по классам и малоклассовая верстка
 ```HTML
