@@ -22,6 +22,7 @@
     box-sizing: border-box;
     border: 1px solid #ddd;
     padding: 2rem;
+    overflow: hidden;
 }
 .ProToSlider .slide-paginator {
     display: flex;
