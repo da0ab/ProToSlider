@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="css/ProToSlider.css?v=0.0.1">
         <title>ProToSlider</title>
     </head>
-    <body>
-        
+    <body>       
         <div class="ProToSlider one">
             <ul class="slide-list slider-bg" style='--height-sl: 30rem'>
                 <li style="--bg-sl: url('https://lipsum.app/random/1600x900');">
@@ -111,79 +110,81 @@
             </ul>
         </div>
         </section>
+
         <script>
-        window.SliderConfig = {
-            '.one': {
-                autoplay: true,
-                speed: 3000,
-                arrows: false,
-                paginator: true,
-                count: 1,
-                gap: 0,
-            },
-            '.two': {
-                autoplay: false,
-                loop: true,
-                arrows: true,
-                paginator: true,
-                count: 2,
-                gap: 10,
-                breakpoints: {
-                    '1024': {
-                    count: 2,
-                    },
-                    '640': {
-                     count: 1,
-                     arrows: false,
-                     },
-                    '480': {
-                     count: 1,
-                     arrows: false,
-                     },
-              }
-            },
-            '.three': {
-                autoplay: false,
-                arrows: true,
-                paginator: true,
-                count: 3,
-                gap: 10,
-                breakpoints: {
-                      '1024': {
-                      count: 3,
-                     },
-                      '640': {
-                      count: 1,
-                      arrows: false,
-                     },
-                      '480': {
-                      count: 1,
-                      arrows: false,
-                     },
-                }
-            },
-            '.four': {
-                autoplay: false,
-                arrows: true,
-                paginator: true,
-                count: 4,
-                gap: 10,
-                breakpoints: {
-                    '1024': {
-                    count: 2,
-                    },
-                    '640': {
-                    count: 1,
+            window.SliderConfig = {
+                '.one': {
+                    autoplay: true,
+                    speed: 3000,
                     arrows: false,
-                    },
-                    '480': {
+                    paginator: true,
                     count: 1,
-                    arrows: false,
-                    },
+                    gap: 0,
+                },
+                '.two': {
+                    autoplay: false,
+                    loop: true,
+                    arrows: true,
+                    paginator: true,
+                    count: 2,
+                    gap: 10,
+                    breakpoints: {
+                        '1024': {
+                            count: 2,
+                        },
+                        '640': {
+                            count: 1,
+                            arrows: false,
+                        },
+                        '480': {
+                            count: 1,
+                            arrows: false,
+                        },
+                    }
+                },
+                '.three': {
+                    autoplay: false,
+                    arrows: true,
+                    paginator: true,
+                    count: 3,
+                    gap: 10,
+                    breakpoints: {
+                        '1024': {
+                            count: 3,
+                        },
+                        '640': {
+                            count: 1,
+                            arrows: false,
+                        },
+                        '480': {
+                            count: 1,
+                            arrows: false,
+                        },
+                    }
+                },
+                '.four': {
+                    autoplay: false,
+                    arrows: true,
+                    paginator: true,
+                    count: 4,
+                    gap: 10,
+                    breakpoints: {
+                        '1024': {
+                            count: 2,
+                        },
+                        '640': {
+                            count: 1,
+                            arrows: false,
+                        },
+                        '480': {
+                            count: 1,
+                            arrows: false,
+                        },
+                    }
                 }
-            }
             };
         </script>
-        <script type="text/javascript" src="js/ProToSlider.js"></script>
+        
+        <script type="text/javascript" src="js/ProToSlider.js?v=0.0.1"></script>
     </body>
 </html>
