@@ -25,11 +25,10 @@ a {
 }
 h1 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 4rem;
     margin: 2rem auto;
     background: #f6f6f6;
     padding: 2rem;
-    width: 40%;
 }
 h3 {
     text-align: center;
@@ -42,7 +41,7 @@ h4 {
     color: #878686;
 }
 p {
-margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 .grid-2 {
     --col: repeat(2, 1fr);
@@ -78,5 +77,8 @@ margin-bottom: 1rem;
     [class*=grid-] > * {
         margin-bottom: 1rem !important;
         display: block;
+    }
+    .ProToSlider .title {
+        text-align: center;
     }
 }
