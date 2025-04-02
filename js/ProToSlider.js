@@ -23,12 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
             this.slider.settings = settings;
             this.countSlides = settings.count ?? 1;
             this.gap = settings.gap ?? 0;
-            this.autoplayEnabled = settings.autoplay ?? false; 
-            this.autoplaySpeed = settings.speed ?? 3000; 
+            this.autoplayEnabled = settings.autoplay ?? false;
+            this.autoplaySpeed = settings.speed ?? 3000;
             this.paginatorEnabled = settings.paginator ?? false;
+            this.arrowsEnabled = settings.arrows ?? true;
             this.slider.style.setProperty('--count-sl', this.countSlides);
             this.slider.style.setProperty('--gap-sl', `${this.gap}px`);
             this.slider.style.setProperty('--speed-sl', `${settings.animSpeed || 500}ms`);
+            if (this.arrowsEnabled) {
+                this.createArrows();
+            } else {
+                const arrows = this.slider.querySelector('.slide-arrows');
+                if (arrows) arrows.remove();
+            }
+            if (this.paginatorEnabled) {
+                this.createPaginator();
+            } else {
+                const paginator = this.slider.querySelector('.slide-paginator');
+                if (paginator) paginator.remove();
+            }
         }
         setupEventListeners() {
             const slideList = this.slider.querySelector('.slide-list');
@@ -152,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < screenCount; i++) {
                 const bullet = document.createElement('li');
                 bullet.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    this.stopAutoplay(); 
+                    e.stopPropagation();
+                    this.stopAutoplay();
                     this.moveScreen(i - this.currentScreen);
                 });
                 bullet.classList.toggle('active', i === this.currentScreen);
@@ -162,6 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
             this.slider.appendChild(paginator);
         }
         createArrows() {
+            if (!this.arrowsEnabled) {
+                const existingArrows = this.slider.querySelector('.slide-arrows');
+                if (existingArrows) existingArrows.remove();
+                return;
+            }
             const slides = this.slider.querySelectorAll('.slide-list li');
             const totalSlides = slides.length;
             if (totalSlides <= this.countSlides) {
@@ -181,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 arrows.appendChild(next);
                 this.slider.appendChild(arrows);
                 const handleArrowClick = (e, direction) => {
-                    e.stopPropagation(); 
-                    this.stopAutoplay(); 
+                    e.stopPropagation();
+                    this.stopAutoplay();
                     this.moveScreen(direction);
                 };
                 prev.addEventListener('click', (e) => handleArrowClick(e, -1));
@@ -224,17 +242,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         if (!sliderConfig) return {};
-        const baseSettings = { ...sliderConfig };
-        delete baseSettings.breakpoints;
+        const baseSettings = {
+            arrows: sliderConfig.arrows !== undefined ? sliderConfig.arrows : true,
+            paginator: sliderConfig.paginator !== undefined ? sliderConfig.paginator : false,
+            count: sliderConfig.count ?? 1,
+            gap: sliderConfig.gap ?? 0,
+            autoplay: sliderConfig.autoplay ?? false,
+            speed: sliderConfig.speed ?? 3000,
+            animSpeed: sliderConfig.animSpeed ?? 500
+        };
         const breakpoints = sliderConfig.breakpoints || {};
         const width = window.innerWidth;
-        let matchedSettings = {};
-        Object.keys(breakpoints).map(Number).sort((a, b) => b - a).forEach(bp => {
-            if (width <= bp) {
-                matchedSettings = { ...matchedSettings, ...breakpoints[bp] };
-            }
-        });
-        return { ...baseSettings, ...matchedSettings };
+        let matchedSettings = { ...baseSettings };
+        Object.keys(breakpoints)
+            .map(Number)
+            .sort((a, b) => b - a)
+            .forEach(bp => {
+                if (width <= bp) {
+                    matchedSettings = {
+                        arrows: breakpoints[bp].arrows !== undefined ? breakpoints[bp].arrows : matchedSettings.arrows,
+                        paginator: breakpoints[bp].paginator !== undefined ? breakpoints[bp].paginator : matchedSettings.paginator,
+                        count: breakpoints[bp].count !== undefined ? breakpoints[bp].count : matchedSettings.count,
+                        gap: breakpoints[bp].gap !== undefined ? breakpoints[bp].gap : matchedSettings.gap,
+                        autoplay: breakpoints[bp].autoplay !== undefined ? breakpoints[bp].autoplay : matchedSettings.autoplay,
+                        speed: breakpoints[bp].speed !== undefined ? breakpoints[bp].speed : matchedSettings.speed,
+                        animSpeed: breakpoints[bp].animSpeed !== undefined ? breakpoints[bp].animSpeed : matchedSettings.animSpeed
+                    };
+                }
+            });
+        return matchedSettings;
     }
     document.querySelectorAll('.ProToSlider').forEach(slider => {
         new SliderManager(slider);
@@ -244,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (slider.sliderManager) {
                 slider.sliderManager.applySettings();
                 slider.sliderManager.moveScreen(0);
-                if (slider.sliderManager.autoplayEnabled) { 
+                if (slider.sliderManager.autoplayEnabled) {
                     slider.sliderManager.startAutoplay();
                 }
             }
