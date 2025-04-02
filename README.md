@@ -1,5 +1,7 @@
 # ProToSlider
-ProToSlider - простой адаптивный слайдер на чистом js
+ProToSlider - адаптивный слайдер на чистом js
+
+
 ### Демо https://da0ab.github.io/ProToSlider/
 
 
