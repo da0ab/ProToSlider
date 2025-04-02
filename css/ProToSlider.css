@@ -14,8 +14,8 @@
     transition: transform var(--speed-sl, 0.5s) ease;
     will-change: transform;
     touch-action: pan-y;
-    width: 100%; /*  */
-    height: 100%; /* */
+    width: 100%;  
+    height: 100%;
 }
 .ProToSlider .slide-list li {
     flex: 0 0 calc((100% - (var(--count-sl, 1) - 1) * var(--gap-sl, 0px)) / var(--count-sl, 1));
@@ -50,7 +50,6 @@
     width: 100%;
     display: flex;
     gap: 1rem;
-    z-index: 2; /**/
     justify-content: var(--justify-arrows, flex-end);
     transform: translateY(-50%);
     pointer-events: none;
@@ -75,7 +74,8 @@
     background: url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m31.9 13.4-1.41 1.41 4.21 4.21h-33.1v2h33.1l-4.21 4.21 1.41 1.41 5.21-5.21 1.42-1.41-1.42-1.41z\"/></svg>') no-repeat center/contain;
     filter: invert(47%);
 }
-.slide-arrows .arrow-prev.deactive::before, .slide-arrows .arrow-next.deactive::before {
+.slide-arrows .arrow-prev.deactive::before, .slide-arrows .arrow-next.deactive::before, .slide-arrows .arrow-prev.deactive:hover::before, .slide-arrows .arrow-next.deactive:hover::before
+{
     /*filter: invert(47%) sepia(100%) saturate(5026%) hue-rotate(54deg) brightness(92%) contrast(97%);*/
     filter: invert(90%)
 }
@@ -87,27 +87,46 @@
 .slide-arrows .arrow-next:hover::before {
     filter: invert(27%) ;
 }
-.one .slide-arrows {
+.arrows-left-bottom .slide-arrows {
     top: var(--top, auto);
     bottom: var(--bottom, -1.5rem);
 }
-.one .slider-bg > * {
+.one li {
+    position: relative;
+    height:80vh;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.7rem;
+}
+.one li * {
+    position: relative;
+}
+.one .slide-list li::before {
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     background-image: var(--bg-sl);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: var(--height-sl);
-    position: relative;
+    filter: brightness(var(--dark, 30%));
+    box-shadow: inset 0 0 122px #000;
 }
 .two {
     --justify-pag: none;
 }
+@media (max-width: 769px) {
+    .ProToSlider .slide-paginator {
+        justify-content: center
+    }
+}
 @media (min-width: 769px) and (max-width: 1024px) {
     .ProToSlider .slide-list {
-        user-select: none; 
+        user-select: none;
         cursor: grab;
-    }
-    .ProToSlider .slide-list:active {
-        cursor: grabbing;
     }
 }
