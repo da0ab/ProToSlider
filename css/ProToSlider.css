@@ -13,9 +13,6 @@
     list-style: none;
     transition: transform var(--speed-sl, 0.5s) ease;
     will-change: transform;
-    touch-action: pan-y;
-    width: 100%;  
-    height: 100%;
 }
 .ProToSlider .slide-list li {
     flex: 0 0 calc((100% - (var(--count-sl, 1) - 1) * var(--gap-sl, 0px)) / var(--count-sl, 1));
@@ -23,6 +20,15 @@
     border: 1px solid #ddd;
     padding: 2rem;
     overflow: hidden;
+    position: relative;
+}
+.ProToSlider .slide-list li::before {
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 .ProToSlider .slide-paginator {
     display: flex;
@@ -123,11 +129,5 @@
 @media (max-width: 769px) {
     .ProToSlider .slide-paginator {
         justify-content: center
-    }
-}
-@media (min-width: 769px) and (max-width: 1024px) {
-    .ProToSlider .slide-list {
-        user-select: none;
-        cursor: grab;
     }
 }
