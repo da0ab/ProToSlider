@@ -42,3 +42,7 @@ ProToSlider - адаптивный слайдер на чистом js
 },
 };
 ```
+Классы управления стрелками и пагинатором
+- paginator-left
+- arrows-right-bottom
+- arrows-center-bottom
