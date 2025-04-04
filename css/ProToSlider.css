@@ -116,7 +116,7 @@
 .paginator-left {
     --justify-pag: none;
 }
-.arrows-left-bottom .slide-arrows {
+.arrows-right-bottom .slide-arrows {
     --top: auto;
     --bottom: -1.5rem;
 }
