@@ -3,34 +3,28 @@
     position: relative;
     margin-bottom: var(--m-b);
 }
-.ProToSlider .title {
+.title {
     margin-bottom: 1rem;
 }
-.ProToSlider .slide-list {
+.slide-list {
     display: flex;
     gap: var(--gap-sl, 1px);
     padding: 0;
     list-style: none;
     transition: transform var(--speed-sl, 0.5s) ease;
     will-change: transform;
+    touch-action: pan-y;
+    width: 100%;
+    height: 100%;
 }
-.ProToSlider .slide-list li {
+.slide-list li {
     flex: 0 0 calc((100% - (var(--count-sl, 1) - 1) * var(--gap-sl, 0px)) / var(--count-sl, 1));
     box-sizing: border-box;
     border: 1px solid #ddd;
     padding: 2rem;
     overflow: hidden;
-    position: relative;
 }
-.ProToSlider .slide-list li::before {
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-.ProToSlider .slide-paginator {
+.slide-paginator {
     display: flex;
     justify-content: var(--justify-pag, center);
     gap: 8px;
@@ -38,7 +32,7 @@
     list-style: none;
     padding: 0;
 }
-.ProToSlider .slide-paginator li {
+.slide-paginator li {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -46,23 +40,23 @@
     cursor: pointer;
     transition: background 0.3s;
 }
-.ProToSlider .slide-paginator li.active {
+.slide-paginator li.active {
     background: #333;
 }
-.ProToSlider .slide-arrows {
+.slide-arrows {
     position: absolute;
     top: var(--top, 10px);
     bottom: var(--bottom, auto);
     right: 1rem;
-    width: 100%;
+    width: 99%;
     display: flex;
     gap: 1rem;
     justify-content: var(--justify-arrows, flex-end);
     transform: translateY(-50%);
     pointer-events: none;
 }
-.ProToSlider .slide-arrows .arrow-prev,
-.ProToSlider .slide-arrows .arrow-next {
+.slide-arrows .arrow-prev,
+.slide-arrows .arrow-next {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -94,11 +88,7 @@
 .slide-arrows .arrow-next:hover::before {
     filter: invert(27%) ;
 }
-.arrows-left-bottom .slide-arrows {
-    top: var(--top, auto);
-    bottom: var(--bottom, -1.5rem);
-}
-.one li {
+.one .slide-list li {
     position: relative;
     height:80vh;
     display: grid;
@@ -110,18 +100,37 @@
     position: relative;
 }
 .one .slide-list li::before {
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
     background-image: var(--bg-sl);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     filter: brightness(var(--dark, 30%));
-    box-shadow: inset 0 0 122px #000;
+    box-shadow: var(--shadow, inset 0 0 122px #000);
 }
-.two {
+.paginator-left {
     --justify-pag: none;
 }
+.arrows-left-bottom .slide-arrows {
+    --top: auto;
+    --bottom: -1.5rem;
+}
+.arrows-center-bottom .slide-arrows {
+    --top: auto;
+    --justify-arrows: space-between;
+    --bottom: -1.5rem;
+    left: 5px;
+}
+.arrows-center-bottom .slide-paginator {
+    --justify-pag: center ;
+}
 @media (max-width: 769px) {
-    .ProToSlider .slide-paginator {
-        justify-content: center
+    .slide-paginator {
+        --justify-pag: center
     }
 }
