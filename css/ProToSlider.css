@@ -126,9 +126,6 @@
     --bottom: -1.5rem;
     left: 5px;
 }
-.arrows-center-bottom .slide-paginator {
-    --justify-pag: center ;
-}
 @media (max-width: 769px) {
     .slide-paginator {
         --justify-pag: center
